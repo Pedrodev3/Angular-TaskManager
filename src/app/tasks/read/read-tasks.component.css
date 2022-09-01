@@ -1,0 +1,16 @@
+/*Utilizado para borda da tabela*/
+.border{
+  border: .2rem solid lightblue;
+}
+
+/*Utilizado para incluir um espaço entre os botões "editar" e "excluir", respectivamente*/
+.padding{
+  margin-right: 1.2rem;
+}
+
+.noneTask{
+  border: .4rem solid red;
+  border-radius: 1rem;
+  width: 15%;
+  padding: 1rem 1.3rem;
+}
