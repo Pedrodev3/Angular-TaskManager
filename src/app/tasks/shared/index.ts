@@ -1,5 +1,5 @@
 export
   * from './task.model';
 export
-  * from './services/task.service'
+  * from './services/tasks.service'
 
