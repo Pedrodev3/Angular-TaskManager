@@ -1,1 +1,67 @@
-<p>insert-tasks works!</p>
+<h1>Cadastrar tarefa</h1>
+
+<div class="well">
+  <!--"#" - Serve para disponibilizar uma variável local
+  O "formTask" faz referência ao ViewChild do componente -->
+  <form #formTask="ngForm">
+    <div class="form-group">
+      <label for="nome">Tarefa:</label>
+
+      <!-- Input para erros de validação -->
+        <!-- [()] -> Two-way binding: Da para o componente uma forma de compartilhar dados.
+        Ele combina Property Binding com Event Binding (por isso o nome)
+        Ele mantém em total sincronismo o objeto criado no component e na view (atualizando os dois simultaneamente)-->
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="task.name"
+        #name="ngModel"
+        minlength="5"
+        required
+      />
+        <!-- errors -> Array que vem por padrão quando se faz referência ao "ngModel"
+        e tenta buscar o erro a partir dos atributos que você colocou na sua tag, como pode ser visto com "required" e "minLength"-->
+      <div
+        *ngIf="name.errors && (name.dirty || name.touched)"
+        class="alert alert-danger"
+      >
+        <!--Caso tenha sido digitado algum conteúdo dentro do input então esse "errors"
+        será escondido e o campo não aparecerá, caso contrário você já sabe-->
+        <div [hidden]="!name.errors.required">Digite a tarefa.</div>
+        <!--Lógica parecida com a de cima-->
+        <div [hidden]="!name.errors.minlength">
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <!-- [disabled] Caso o form não seja válido o botão será desabilitado -->
+      <!-- () -> Event Binding: Para atribuição de um evento no Angular -->
+      <input
+        type="submit"
+        class="btn btn-success"
+        (click)="insert()"
+        value="Cadastrar"
+        [disabled]="!formTask.form.valid"
+      />
+
+      <!--[routerLink] ->
+      Operador de atribuição sendo usado junto com diretiva do Angular feita
+      para roteamento e que está dentro do pacote "router".
+      Com isso, é atribuído um valor para o routerLink, valor esse que é a url
+      que você quer adicionar e que vai ser utilizada no momento que interagir com a âncora
+      É criado um link para a tag que possui esse operador-->
+      <a [routerLink]="['/tasks']" class="btn btn-default">
+        <span
+          class="glyphicon glyphicon-chevron-left"
+          aria-hidden="true"
+        ></span>
+        Voltar
+      </a>
+
+    </div>
+  </form>
+</div>

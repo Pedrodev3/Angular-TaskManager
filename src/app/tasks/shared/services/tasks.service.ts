@@ -15,24 +15,36 @@ export class TasksService {
   }
 
   // Instanciando um objeto "task" a partir da classe "Task" / E o retorno será "void", pois não é necessário retornar algo
-  register(task: Task): void {
+  insert(task: Task): void {
     const tasks = this.readAll(); // Primeiro você armazena todas as tarefas já cadastradas em uma variável
     task.id = new Date().getTime(); // Depois vc cadastra uma nova tarefa a partir de um valor dado a um id utilizando do objeto "Date"
     tasks.push(task); // Inserção de nova tarefa
     localStorage['tasks'] = JSON.stringify(tasks); // Guardando os dados convertidos em String no localStorage
   }
 
-  // Recebe um id do tipo "number" e retorna a classe Task para esse id
+  /**
+    * @param id -> Recebe um id do tipo "number" e retorna o mesmo tipo (array de objetos) que a classe Task
+    *
+    * @method find -> Interage com cada elemento (nesse caso chamado de "task")
+    * do array e retorna o primeiro elemento que for considerado como true ao ser comparado com
+    * o parâmetro do tipo number (nesse caso também chamado de "id").
+    *
+    * Resumindo: Se o id desse elemento específico da lista for igual ao valor do id que foi passado,
+    * então o elemento será retornado.
+  */
   searchForId(id: number): Task {
     const tasks: Task[] = this.readAll();
-    return tasks.find(task => task.id === id); // Retorna o primeiro elemento do array que é considerado como true
-    // Se o id desse elemento específico da lista for igual ao valor do id que foi passado, então o elemento será retornado
+    return tasks.find(task => task.id === id);
   }
 
+  /**
+   * @params obj - cada objeto/tarefa/elemento desse array
+   * @params index - posição do objeto/tarefa/elemento que está sendo inteirado no momento
+   * @params objs - se resume a variável "tasks" que nesse caso tem seu valor vindo do método "readAll",
+   * que traz consigo um array de objetos com todas as tarefas que já foram cadastradas
+  */
   update(task: Task): void {
     const tasks: Task[] = this.readAll();
-    /* obj -> objeto em si / index -> posição da tarefa/elemento que está sendo inteirado no momento / objs -> lista das tarefas
-    (objs == tasks) */
     tasks.forEach((obj, index, objs) => {
       if (task.id === obj.id) {
         objs[index] = task;
