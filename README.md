@@ -1,3 +1,5 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/Pedrodev3/calculadora-app.github.io) ![GitHub last commit](https://img.shields.io/github/last-commit/Pedrodev3/calculadora-app.github.io)
+
 # GerenciadorDeTarefas
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
